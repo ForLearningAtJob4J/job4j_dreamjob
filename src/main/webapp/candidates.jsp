@@ -1,8 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ru.job4j.dream.store.Store" %>
-<%@ page import="ru.job4j.dream.model.Post" %>
-<%@ page import="java.time.format.DateTimeFormatter" %>
-<%@ page import="java.time.format.FormatStyle" %>
+<%@ page import="ru.job4j.dream.model.Candidate" %>
 
 <!doctype html>
 <html lang="en">
@@ -29,23 +27,19 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Вакансии
+                Кандидаты
             </div>
             <div class="card-body">
                 <table class="table">
                     <thead>
                         <tr scope="row">
-                            <th scope="col">Название</th>
-                            <th scope="col">Описание</th>
-                            <th scope="col">Дата</th>
+                            <th scope="col">Названия</th>
                         </tr>
                     </thead>
                     <tbody>
-                    <% for (Post post : Store.instOf().findAllPosts()) { %>
+                    <% for (Candidate can : Store.instOf().findAllCandidates()) { %>
                         <tr scope="row">
-                            <td><%= post.getName() %></td>
-                            <td><%= post.getDescription() %></td>
-                            <td><%= DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT).format(post.getCreated()) %></td>
+                            <td><%= can.getName() %></td>
                         </tr>
                     <% } %>
                     </tbody>
