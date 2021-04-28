@@ -1,9 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page import="ru.job4j.dream.store.Store" %>
 <%@ page import="ru.job4j.dream.model.Post" %>
-<%@ page import="java.time.format.DateTimeFormatter" %>
-<%@ page import="java.time.format.FormatStyle" %>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -24,27 +21,17 @@
     <title>Работа мечты</title>
 </head>
 <body>
-<div class="container">
-    <div class="row">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Объявления</th>
-                    <th scope="col">Описание</th>
-                    <th scope="col">Дата</th>
-                </tr>
-            </thead>
-            <tbody>
-            <% for (Post post : Store.instOf().findAll()) { %>
-                <tr scope="row">
-                    <td><%= post.getName() %></td>
-                    <td><%= post.getDescription() %></td>
-                    <td><%= DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT).format(post.getCreated()) %></td>
-                </tr>
-            <% } %>
-            </tbody>
-        </table>
+    <div class="container">
+        <div class="row">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/posts.jsp">Вакансии</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>/candidates.jsp">Кандидаты</a>
+                </li>
+            </ul>
+        </div>
     </div>
-</div>
 </body>
 </html>
