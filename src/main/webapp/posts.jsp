@@ -3,6 +3,7 @@
 <%@ page import="ru.job4j.dream.model.Post" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page import="java.time.format.FormatStyle" %>
+<%@ page import="java.util.Collection" %>
 
 <!doctype html>
 <html lang="en">
@@ -31,10 +32,10 @@
                 <a class="nav-link" href="<%=request.getContextPath()%>">Главная</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<%=request.getContextPath()%>/posts.jsp">Вакансии</a>
+                <a class="nav-link" href="<%=request.getContextPath()%>/posts.do">Вакансии</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<%=request.getContextPath()%>/candidates.jsp">Кандидаты</a>
+                <a class="nav-link" href="<%=request.getContextPath()%>/candidates.do">Кандидаты</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<%=request.getContextPath()%>/post/edit.jsp">Добавить вакансию</a>
@@ -59,7 +60,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <% for (Post post : Store.instOf().findAllPosts()) { %>
+                    <% for (Post post :  (Collection<Post>) request.getAttribute("posts")) { %>
                         <tr scope="row">
                             <td>
                                 <a href="<%=request.getContextPath()%>/post/edit.jsp?id=<%=post.getId()%>">
