@@ -22,9 +22,12 @@
     <title>Работа мечты</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container pt-3" >
         <div class="row">
             <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="<%=request.getContextPath()%>">Главная</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<%=request.getContextPath()%>/posts.jsp">Вакансии</a>
                 </li>
