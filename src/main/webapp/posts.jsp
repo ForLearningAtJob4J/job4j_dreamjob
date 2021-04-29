@@ -4,6 +4,7 @@
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page import="java.time.format.FormatStyle" %>
 <%@ page import="java.util.Collection" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!doctype html>
 <html lang="en">
@@ -60,18 +61,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <% for (Post post :  (Collection<Post>) request.getAttribute("posts")) { %>
-                        <tr scope="row">
+                    <c:forEach items="${posts}" var="post">
+                        <tr>
                             <td>
-                                <a href="<%=request.getContextPath()%>/post/edit.jsp?id=<%=post.getId()%>">
+                                <a href='<c:url value="/post/edit.jsp?id=${post.id}"/>'>
                                     <i class="fa fa-edit mr-3"></i>
                                 </a>
-                                <%=post.getName() %>
+                                <c:out value="${post.name}"/>
                             </td>
-                            <td><%= post.getDescription() %></td>
-                            <td><%= DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT).format(post.getCreated()) %></td>
+                            <td><c:out value="${post.description}"/></td>
+                            <td><c:out value="${DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT).format(post.getCreated())}"/></td>
                         </tr>
-                    <% } %>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>
