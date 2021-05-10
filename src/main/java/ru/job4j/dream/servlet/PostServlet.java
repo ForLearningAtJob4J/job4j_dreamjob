@@ -5,7 +5,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import ru.job4j.dream.model.Post;
-import ru.job4j.dream.store.MemStore;
+import ru.job4j.dream.store.PsqlStore;
 
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -29,7 +29,7 @@ public class PostServlet extends HttpServlet {
             }
         }
 
-        Post post = MemStore.instOf().findPostById(intId);
+        Post post = PsqlStore.instOf().findPostById(intId);
         if (post == null) {
             post = new Post(0, "", "");
             title = "Новая вакансия.";
