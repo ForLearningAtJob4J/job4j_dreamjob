@@ -5,7 +5,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import ru.job4j.dream.model.Candidate;
-import ru.job4j.dream.store.Store;
+import ru.job4j.dream.store.MemStore;
 
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -29,7 +29,7 @@ public class CandidateServlet extends HttpServlet {
             }
         }
 
-        Candidate candidate = Store.instOf().findCandidateById(intId);
+        Candidate candidate = MemStore.instOf().findCandidateById(intId);
         if (candidate == null) {
             candidate = new Candidate(0, "");
             title = "Новый кандидат.";
