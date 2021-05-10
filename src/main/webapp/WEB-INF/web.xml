@@ -7,19 +7,19 @@
 
     <display-name>Archetype Created Web Application</display-name>
     <servlet>
-        <servlet-name>PostServlet</servlet-name>
-        <servlet-class>ru.job4j.dream.servlet.PostServlet</servlet-class>
+        <servlet-name>PostListServlet</servlet-name>
+        <servlet-class>ru.job4j.dream.servlet.PostListServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>PostServlet</servlet-name>
+        <servlet-name>PostListServlet</servlet-name>
         <url-pattern>/posts.do</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>CandidateServlet</servlet-name>
-        <servlet-class>ru.job4j.dream.servlet.CandidateServlet</servlet-class>
+        <servlet-name>CandidateListServlet</servlet-name>
+        <servlet-class>ru.job4j.dream.servlet.CandidateListServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>CandidateServlet</servlet-name>
+        <servlet-name>CandidateListServlet</servlet-name>
         <url-pattern>/candidates.do</url-pattern>
     </servlet-mapping>
     <servlet>
@@ -29,5 +29,22 @@
     <servlet-mapping>
         <servlet-name>IndexServlet</servlet-name>
         <url-pattern>/index.do</url-pattern>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>CandidateServlet</servlet-name>
+        <servlet-class>ru.job4j.dream.servlet.CandidateServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CandidateServlet</servlet-name>
+        <url-pattern>/candidate.do</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>PostServlet</servlet-name>
+        <servlet-class>ru.job4j.dream.servlet.PostServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PostServlet</servlet-name>
+        <url-pattern>/post.do</url-pattern>
     </servlet-mapping>
 </web-app>

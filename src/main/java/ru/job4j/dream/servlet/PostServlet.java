@@ -1,29 +1,42 @@
 package ru.job4j.dream.servlet;
 
 import jakarta.servlet.ServletException;
-import ru.job4j.dream.model.Post;
-import ru.job4j.dream.store.Store;
-
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import ru.job4j.dream.model.Post;
+import ru.job4j.dream.store.Store;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 public class PostServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("posts", Store.instOf().findAllPosts());
-        req.getRequestDispatcher("posts.jsp").forward(req, resp);
-    }
+        String id = req.getParameter("id");
+        int intId;
+        String title;
+        if (id == null) {
+            title = "Новая вакансия.";
+            intId = 0;
+        } else {
+            title = "Редактирование вакансии.";
+            try {
+                intId = Integer.parseInt(id);
+            } catch (NumberFormatException nfe) {
+                Logger.getLogger(PostServlet.class.getName()).warning("Suspicious parameter\n" + nfe.getMessage());
+                intId = 0;
+            }
+        }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        req.setCharacterEncoding("UTF-8");
-        Store.instOf().save(new Post(
-                Integer.parseInt(req.getParameter("id")),
-                req.getParameter("name"),
-                req.getParameter("description")));
-        resp.sendRedirect(req.getContextPath() + "/posts.do");
+        Post post = Store.instOf().findPostById(intId);
+        if (post == null) {
+            post = new Post(0, "", "");
+            title = "Новая вакансия.";
+        }
+
+        req.setAttribute("title", title);
+        req.setAttribute("post", post);
+        req.getRequestDispatcher("WEB-INF/post/edit.jsp").forward(req, resp);
     }
 }

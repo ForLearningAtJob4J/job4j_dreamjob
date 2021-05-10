@@ -1,6 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="ru.job4j.dream.store.Store" %>
-<%@ page import="ru.job4j.dream.model.Post" %>
 
 <!doctype html>
 <html lang="en">
@@ -23,25 +21,7 @@
 </head>
 <body>
     <div class="container pt-3" >
-        <div class="row">
-            <ul class="nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="<%=request.getContextPath()%>">Главная</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<%=request.getContextPath()%>/posts.do">Вакансии</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<%=request.getContextPath()%>/candidates.do">Кандидаты</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<%=request.getContextPath()%>/post/edit.jsp">Добавить вакансию</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="<%=request.getContextPath()%>/candidate/edit.jsp">Добавить кандидата</a>
-                </li>
-            </ul>
-        </div>
+        <%@include file="includes/header.jsp" %>
         <div class="row">
             <div class="card" style="width: 100%">
                 <div class="card-header">
