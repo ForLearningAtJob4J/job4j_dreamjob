@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Properties;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class PsqlStore implements Store {
@@ -64,7 +65,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            LOGGER.warning(e.getMessage());
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
         }
         return posts;
     }
@@ -81,7 +82,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            LOGGER.warning(e.getMessage());
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
         }
         return candidates;
     }
@@ -107,7 +108,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            LOGGER.warning(e.getMessage());
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
         }
         return candidate;
     }
@@ -122,7 +123,7 @@ public class PsqlStore implements Store {
                 throw new SQLException("Something wrong while updating table CANDIDATE!");
             }
         } catch (Exception e) {
-            LOGGER.warning(e.getMessage());
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
         }
     }
 
@@ -148,7 +149,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            LOGGER.warning(e.getMessage());
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
         }
         return post;
     }
@@ -164,7 +165,7 @@ public class PsqlStore implements Store {
                 throw new SQLException("Something wrong while updating table POST!");
             }
         } catch (Exception e) {
-            LOGGER.warning(e.getMessage());
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
         }
     }
 
@@ -185,7 +186,7 @@ public class PsqlStore implements Store {
             }
 
         } catch (Exception e) {
-            LOGGER.warning(e.getMessage());
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
         }
         return post;
     }
@@ -205,7 +206,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            LOGGER.warning(e.getMessage());
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
         }
         return candidate;
     }
