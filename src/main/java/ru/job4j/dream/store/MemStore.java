@@ -56,6 +56,16 @@ public class MemStore implements Store {
         candidates.put(candidate.getId(), candidate);
     }
 
+    @Override
+    public void delete(Candidate candidate) {
+        candidates.remove(candidate.getId());
+    }
+
+    @Override
+    public void delete(Post post) {
+        posts.remove(post.getId());
+    }
+
     public Post findPostById(int id) {
         return posts.get(id);
     }

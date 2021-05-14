@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
+<%--    <meta charset="utf-8">--%>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
@@ -21,6 +21,7 @@
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css"/>
     <title>Работа мечты</title>
 </head>
 <body>
@@ -32,19 +33,32 @@
                 Кандидаты
             </div>
             <div class="card-body">
-                <table class="table">
+                <table class="table align-content-center">
                     <thead>
                     <tr>
                         <th scope="col">Названия</th>
+                        <th scope="col">Фото</th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>
                     <c:forEach items="${candidates}" var="candidate">
                         <tr>
                             <td>
-                                <a href='<c:url value="/candidate.do?id=${candidate.id}"/>'><i
+                                <a href='<c:url value="/candidate.do?op=edit&id=${candidate.id}"/>'><i
                                         class="fa fa-edit mr-3"></i></a>
                                 <c:out value="${candidate.name}"/>
+                            </td>
+                            <td>
+                                <div class="img_wrapper">
+                                    <img src="<c:url value='/download?name=${candidate.id}'/>" alt/>
+                                </div>
+                                <a href="<c:url value='/photo?op=load&id=${candidate.id}'/>"><i class="fa fa-folder-open-o"></i></a>
+                                <a href="<c:url value='/photo?op=del&id=${candidate.id}'/>"><i class="fa fa-remove"></i></a>
+                            </td>
+                            <td>
+                                <a href="<c:url value='/candidate.do?op=del&id=${candidate.id}'/>"><i
+                                        class="fa fa-remove fa-2x"></i></a>
                             </td>
                         </tr>
                     </c:forEach>

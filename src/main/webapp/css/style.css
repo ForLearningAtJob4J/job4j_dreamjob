@@ -1,0 +1,23 @@
+.fa-remove {
+    color: red;
+}
+
+img {
+    width: 100px;
+    box-sizing: border-box;
+
+}
+
+img::after {
+    width: 100px;
+    content: "Фотография еще не загружена";
+    box-sizing: border-box;
+}
+
+.img_wrapper {
+    border: 2px green solid;
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    overflow: hidden;
+}

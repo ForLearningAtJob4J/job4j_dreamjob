@@ -170,6 +170,34 @@ public class PsqlStore implements Store {
     }
 
     @Override
+    public void delete(Candidate candidate) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("DELETE FROM candidate WHERE id = (?)")
+        ) {
+            ps.setInt(1, candidate.getId());
+            if (ps.executeUpdate() == 0) {
+                throw new SQLException("Something wrong while deleting from table CANDIDATES!");
+            }
+        } catch (Exception e) {
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public void delete(Post post) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("DELETE FROM post WHERE id = (?)")
+        ) {
+            ps.setInt(1, post.getId());
+            if (ps.executeUpdate() == 0) {
+                throw new SQLException("Something wrong while deleting from table POST!");
+            }
+        } catch (Exception e) {
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
+        }
+    }
+
+    @Override
     public Post findPostById(int id) {
         Post post = null;
         try (Connection cn = pool.getConnection();

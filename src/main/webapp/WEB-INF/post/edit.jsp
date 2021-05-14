@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
+<%--    <meta charset="utf-8">--%>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
@@ -27,7 +27,7 @@
                     ${title}
                 </div>
                 <div class="card-body">
-                    <form action="<%=request.getContextPath()%>/posts.do?id=${post.id}" method="post">
+                    <form action="<%=request.getContextPath()%>/post.do?op=edit&id=${post.id}" method="post">
                         <div class="form-group">
                             <label>Название</label>
                             <input type="text" class="form-control" name="name" value="${post.name}">
