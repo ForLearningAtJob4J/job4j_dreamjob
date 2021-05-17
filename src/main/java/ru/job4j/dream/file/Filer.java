@@ -7,8 +7,6 @@ public class Filer {
 
     static public void deleteFile(String fileName) {
         File file = new File(IMAGE_FOLDER + fileName);
-        synchronized (IMAGE_FOLDER) {
-            file.delete();
-        }
+        file.delete();
     }
 }

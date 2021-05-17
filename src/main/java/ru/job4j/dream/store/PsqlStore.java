@@ -175,9 +175,7 @@ public class PsqlStore implements Store {
              PreparedStatement ps = cn.prepareStatement("DELETE FROM candidate WHERE id = (?)")
         ) {
             ps.setInt(1, candidate.getId());
-            if (ps.executeUpdate() == 0) {
-                throw new SQLException("Something wrong while deleting from table CANDIDATES!");
-            }
+            ps.executeUpdate();
         } catch (Exception e) {
             LOGGER.log(Level.WARNING, e.getMessage(), e);
         }
@@ -189,9 +187,7 @@ public class PsqlStore implements Store {
              PreparedStatement ps = cn.prepareStatement("DELETE FROM post WHERE id = (?)")
         ) {
             ps.setInt(1, post.getId());
-            if (ps.executeUpdate() == 0) {
-                throw new SQLException("Something wrong while deleting from table POST!");
-            }
+            ps.executeUpdate();
         } catch (Exception e) {
             LOGGER.log(Level.WARNING, e.getMessage(), e);
         }

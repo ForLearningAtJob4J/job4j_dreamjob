@@ -49,13 +49,11 @@ public class PhotoServlet extends HttpServlet {
                 folder.mkdir();
             }
 
-            synchronized (Filer.IMAGE_FOLDER) {
-                for (FileItem item : items) {
-                    if (!item.isFormField()) {
-                        File file = new File(folder + File.separator + req.getParameter("id")); // item.getName()
-                        try (FileOutputStream out = new FileOutputStream(file)) {
-                            out.write(item.getInputStream().readAllBytes());
-                        }
+            for (FileItem item : items) {
+                if (!item.isFormField()) {
+                    File file = new File(folder + File.separator + req.getParameter("id")); // item.getName()
+                    try (FileOutputStream out = new FileOutputStream(file)) {
+                        out.write(item.getInputStream().readAllBytes());
                     }
                 }
             }

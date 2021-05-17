@@ -28,7 +28,7 @@
 </head>
 <body>
 <div class="container pt-3">
-    <%@include file="includes/header.jsp" %>
+    <jsp:include page="includes/header.jsp"/>
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">

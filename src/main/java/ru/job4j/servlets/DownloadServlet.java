@@ -25,10 +25,8 @@ public class DownloadServlet extends HttpServlet {
         }
         resp.setContentType("application/octet-stream");
         resp.setHeader("Content-Disposition", "attachment; filename=\"" + Objects.requireNonNull(downloadFile).getName() + "\"");
-        synchronized (Filer.IMAGE_FOLDER) {
-            try (FileInputStream stream = new FileInputStream(downloadFile)) {
-                resp.getOutputStream().write(stream.readAllBytes());
-            }
+        try (FileInputStream stream = new FileInputStream(downloadFile)) {
+            resp.getOutputStream().write(stream.readAllBytes());
         }
     }
 }
