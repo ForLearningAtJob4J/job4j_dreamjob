@@ -17,5 +17,8 @@
         <li class="nav-item">
             <a class="nav-link" href="<%=request.getContextPath()%>/candidate.do">Добавить кандидата</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="<%=request.getContextPath()%>/auth.do">Войти</a>
+        </li>
     </ul>
 </div>
