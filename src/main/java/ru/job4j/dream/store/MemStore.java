@@ -97,4 +97,12 @@ public class MemStore implements Store {
     public Candidate findCandidateById(int id) {
         return candidates.get(id);
     }
+
+    public User findUserByEmail(String email) {
+        return users.entrySet().stream()
+                .filter(u -> u.getValue().getEmail().equals(email))
+                .findFirst()
+                .map(Map.Entry::getValue)
+                .orElse(null);
+    }
 }

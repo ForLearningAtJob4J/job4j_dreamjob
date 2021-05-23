@@ -17,6 +17,7 @@ public interface Store {
 
     Post findPostById(int id);
     Candidate findCandidateById(int id);
+    User findUserByEmail(String email);
 
     void delete(Candidate candidate);
     void delete(Post post);
