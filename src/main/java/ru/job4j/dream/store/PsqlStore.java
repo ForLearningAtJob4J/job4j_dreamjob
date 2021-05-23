@@ -3,6 +3,7 @@ package ru.job4j.dream.store;
 import org.apache.commons.dbcp2.BasicDataSource;
 import ru.job4j.dream.model.Candidate;
 import ru.job4j.dream.model.Post;
+import ru.job4j.dream.model.User;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -85,6 +86,50 @@ public class PsqlStore implements Store {
             LOGGER.log(Level.WARNING, e.getMessage(), e);
         }
         return candidates;
+    }
+
+    @Override
+    public void save(User user) {
+        if (user.getId() == 0) {
+            create(user);
+        } else {
+            update(user);
+        }
+    }
+
+    private User create(User user) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("INSERT INTO \"user\"(name, email, password) VALUES (?, ?, ?)", PreparedStatement.RETURN_GENERATED_KEYS)
+        ) {
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getPassword());
+            ps.execute();
+            try (ResultSet id = ps.getGeneratedKeys()) {
+                if (id.next()) {
+                    user.setId(id.getInt(1));
+                }
+            }
+        } catch (Exception e) {
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
+        }
+        return user;
+    }
+
+    private void update(User user) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("UPDATE \"user\" SET name = (?), email = (?), password = (?) WHERE id = (?)")
+        ) {
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getPassword());
+            ps.setInt(4, user.getId());
+            if (ps.executeUpdate() == 0) {
+                throw new SQLException("Something wrong while updating table USER!");
+            }
+        } catch (Exception e) {
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
+        }
     }
 
     @Override
@@ -187,6 +232,18 @@ public class PsqlStore implements Store {
              PreparedStatement ps = cn.prepareStatement("DELETE FROM post WHERE id = (?)")
         ) {
             ps.setInt(1, post.getId());
+            ps.executeUpdate();
+        } catch (Exception e) {
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public void delete(User user) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("DELETE FROM \"user\" WHERE id = (?)")
+        ) {
+            ps.setInt(1, user.getId());
             ps.executeUpdate();
         } catch (Exception e) {
             LOGGER.log(Level.WARNING, e.getMessage(), e);

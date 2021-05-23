@@ -2,6 +2,7 @@ package ru.job4j.dream.store;
 
 import ru.job4j.dream.model.Candidate;
 import ru.job4j.dream.model.Post;
+import ru.job4j.dream.model.User;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -17,8 +18,11 @@ public class MemStore implements Store {
 
     private final Map<Integer, Candidate> candidates = new ConcurrentHashMap<>();
 
+    private final Map<Integer, User> users = new ConcurrentHashMap<>();
+
     private static final AtomicInteger POST_ID = new AtomicInteger(3);
     private static final AtomicInteger CANDIDATE_ID = new AtomicInteger(3);
+    private static final AtomicInteger USER_ID = new AtomicInteger(1);
 
     private MemStore() {
         posts.put(1, new Post(1, "Junior Java Job", "blah-blah-blah", LocalDateTime.now()));
@@ -28,6 +32,13 @@ public class MemStore implements Store {
         candidates.put(1, new Candidate(1, "Junior Java"));
         candidates.put(2, new Candidate(2, "Middle Java"));
         candidates.put(3, new Candidate(3, "Senior Java"));
+
+        User admin = new User();
+        admin.setId(1);
+        admin.setName("Admin");
+        admin.setEmail("root@local");
+        admin.setPassword("root");
+        users.put(1, admin);
     }
 
     public static MemStore instOf() {
@@ -57,6 +68,14 @@ public class MemStore implements Store {
     }
 
     @Override
+    public void save(User user) {
+        if (user.getId() == 0) {
+            user.setId(USER_ID.incrementAndGet());
+        }
+        users.put(user.getId(), user);
+    }
+
+    @Override
     public void delete(Candidate candidate) {
         candidates.remove(candidate.getId());
     }
@@ -64,6 +83,11 @@ public class MemStore implements Store {
     @Override
     public void delete(Post post) {
         posts.remove(post.getId());
+    }
+
+    @Override
+    public void delete(User user) {
+        users.remove(user.getId());
     }
 
     public Post findPostById(int id) {
