@@ -36,7 +36,7 @@
                 </div>
             </c:if>
             <div class="card-header">
-                Авторизация
+                Авторизация | <a href="<%=request.getContextPath()%>/reg.do?op=edit&id=0">Регистрация</a>
             </div>
             <div class="card-body">
                 <form action="<%=request.getContextPath()%>/auth.do" method="post">

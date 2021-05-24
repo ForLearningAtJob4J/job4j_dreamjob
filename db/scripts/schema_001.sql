@@ -19,3 +19,7 @@ CREATE TABLE IF NOT EXISTS "user"
     email    VARCHAR(1024) UNIQUE,
     password VARCHAR(32)
 );
+
+INSERT INTO "user" (name, email, password)
+VALUES ('Admin', 'root@local', 'root')
+ON CONFLICT (email) DO UPDATE SET password = 'root';

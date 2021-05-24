@@ -19,7 +19,7 @@
             <a class="nav-link" href="<%=request.getContextPath()%>/candidate.do">Добавить кандидата</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<%=request.getContextPath()%>/auth.do"> <c:out value="${requestScope.user.name}"/> | Выйти</a>
+            <a class="nav-link" href="<%=request.getContextPath()%>/auth.do?op=exit"> <c:out value="${requestScope.user.name}"/> | Выйти</a>
         </li>
     </ul>
 </div>

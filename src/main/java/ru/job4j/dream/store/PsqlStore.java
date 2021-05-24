@@ -293,6 +293,30 @@ public class PsqlStore implements Store {
     }
 
     @Override
+    public User findUserById(int id) {
+        User user = null;
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("SELECT * FROM \"user\" WHERE id = (?)")
+        ) {
+            ps.setInt(1, id);
+            if (ps.execute()) {
+                try (ResultSet rs = ps.getResultSet()) {
+                    if (rs.next()) {
+                        user = new User();
+                        user.setId(rs.getInt("id"));
+                        user.setName(rs.getString("name"));
+                        user.setEmail(rs.getString("email"));
+                        user.setPassword(rs.getString("password"));
+                    }
+                }
+            }
+        } catch (Exception e) {
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
+        }
+        return user;
+    }
+
+    @Override
     public User findUserByEmail(String email) {
         User user = null;
         try (Connection cn = pool.getConnection();

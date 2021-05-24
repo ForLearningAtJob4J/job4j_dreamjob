@@ -98,6 +98,11 @@ public class MemStore implements Store {
         return candidates.get(id);
     }
 
+    @Override
+    public User findUserById(int id) {
+        return users.get(id);
+    }
+
     public User findUserByEmail(String email) {
         return users.entrySet().stream()
                 .filter(u -> u.getValue().getEmail().equals(email))
