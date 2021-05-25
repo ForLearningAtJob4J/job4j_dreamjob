@@ -62,19 +62,18 @@ public class RegServlet extends HttpServlet {
                 user.setName(req.getParameter("name"));
                 user.setEmail(req.getParameter("email"));
                 user.setPassword(req.getParameter("password"));
-                PsqlStore.instOf().save(user);
-                sc.setAttribute("user", user);
-                if (user.getId() == 0) {
+                if (PsqlStore.instOf().findUserByEmail(req.getParameter("email")) != null) {
                     req.setAttribute("error", "Пользователь с таким email уже существует");
                     req.getRequestDispatcher("WEB-INF/reg.jsp").forward(req, resp);
                     return;
                 }
+                PsqlStore.instOf().save(user);
+                sc.setAttribute("user", user);
                 break;
             case "del":
                 user = new User();
                 user.setId(Integer.parseInt(req.getParameter("id")));
                 PsqlStore.instOf().delete(user);
-                sc = req.getSession();
                 sc.setAttribute("user", null);
                 break;
             default:
