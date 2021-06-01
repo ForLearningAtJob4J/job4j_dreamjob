@@ -89,6 +89,26 @@ public class PsqlStore implements Store {
     }
 
     @Override
+    public Collection<User> findAllUsers() {
+        List<User> users = new ArrayList<>();
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("SELECT * FROM \"user\"")
+        ) {
+            try (ResultSet it = ps.executeQuery()) {
+                while (it.next()) {
+                    User user = new User();
+                    user.setId(it.getInt("id"));
+                    user.setName(it.getString("name"));
+                    users.add(user);
+                }
+            }
+        } catch (Exception e) {
+            LOGGER.log(Level.WARNING, e.getMessage(), e);
+        }
+        return users;
+    }
+
+    @Override
     public void save(User user) {
         if (user.getId() == 0) {
             create(user);

@@ -11,6 +11,8 @@ public interface Store {
 
     Collection<Candidate> findAllCandidates();
 
+    Collection<User> findAllUsers();
+
     void save(Post post);
     void save(Candidate candidate);
     void save(User user);
@@ -23,4 +25,5 @@ public interface Store {
     void delete(Candidate candidate);
     void delete(Post post);
     void delete(User user);
+
 }

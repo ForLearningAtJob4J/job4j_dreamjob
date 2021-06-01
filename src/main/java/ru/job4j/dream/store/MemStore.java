@@ -53,6 +53,10 @@ public class MemStore implements Store {
         return candidates.values();
     }
 
+    public Collection<User> findAllUsers() {
+        return users.values();
+    }
+
     public void save(Post post) {
         if (post.getId() == 0) {
             post.setId(POST_ID.incrementAndGet());
