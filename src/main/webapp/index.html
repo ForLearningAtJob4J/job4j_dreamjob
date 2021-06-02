@@ -32,6 +32,22 @@
 
             return false;
         }
+
+        function addRow() {
+            if (!validate()) {
+                return;
+            }
+            const firstName = $('#firstName').val();
+            const lastName = $('#lastName').val();
+            const sex = $('input[name=sex]:checked').val();
+            const desc = $('#desc').val();
+
+            //получаем ссылку на последний элемент в таблице.
+            //и после него добавляем html
+            $('#table tr:last').after(
+                '<tr><td>' + firstName + '</td><td>' + lastName + '</td><td>' + sex + '</td><td>' + desc + '</td></tr>'
+            );
+        }
     </script>
 </head>
 <body>
@@ -65,38 +81,36 @@
             </div>
         </div>
 
-        <button class="btn btn-default col-sm-offset-1 col-1" onclick="return validate();" type="submit">Submit</button>
+<!--        <button class="btn btn-default col-sm-offset-1 col-1" onclick="return validate();" type="submit">Submit</button>-->
     </form>
     <div>
-        <table class="table table-striped">
+        <button class="btn btn-default col-sm-offset-1 col-1" onclick="addRow()">Добавить в таблицу</button>
+        <table id="table" class="table table-striped">
             <thead>
             <tr>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Email</th>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Пол</th>
+                <th>Описание</th>
             </tr>
             </thead>
             <tbody>
             <tr>
                 <td>John</td>
                 <td>Doe</td>
-                <td>john@example.com</td>
+                <td>male</td>
+                <td>blah-blah</td>
             </tr>
             <tr>
                 <td>Mary</td>
                 <td>Moe</td>
-                <td>mary@example.com</td>
-            </tr>
-            <tr>
-                <td>July</td>
-                <td>Dooley</td>
-                <td>july@example.com</td>
+                <td>female</td>
+                <td>wow-wow</td>
             </tr>
             </tbody>
         </table>
     </div>
 </div>
-
 
 </body>
 </html>
