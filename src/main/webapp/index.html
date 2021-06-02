@@ -7,6 +7,32 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        function validate() {
+            let message = '';
+            if($('#firstName').val() === '') {
+                message += 'Имя\n';
+            }
+            if($('#lastName').val() === '') {
+                message += 'Фамилия\n';
+            }
+            if($('input[name=sex]:checked').length === 0) {
+                message += 'Пол\n';
+            }
+
+            if($('#desc').val() === '') {
+                message += 'Описание\n';
+            }
+
+            if (message === '') {
+                return true;
+            }
+            message = "Заполните следующие поля:\n\n" + message;
+            alert(message);
+
+            return false;
+        }
+    </script>
 </head>
 <body>
 
@@ -21,24 +47,25 @@
         <div class="form-group">
             <label class="control-label col-sm-1" for="LastName">Фамилия:</label>
             <div class="col-sm-11">
-                <input class="form-control" id="LastName" type="text">
+                <input class="form-control" id="lastName" type="text">
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-1">Пол</label>
             <div class="col-sm-11">
-                <label class="radio-inline"><input checked name="sex" type="radio">Мужской</label>
-                <label class="radio-inline"><input name="sex" type="radio">Женский</label>
+                <label class="radio-inline"><input name="sex" type="radio" value="male">Мужской</label>
+                <label class="radio-inline"><input name="sex" type="radio" value="female">Женский</label>
+                <label class="radio-inline"><input checked name="sex" type="radio" value="hidden">Не хочу сообщать</label>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-1" for="desc">Comment:</label>
+            <label class="control-label col-sm-1" for="desc">Описание:</label>
             <div class="col-sm-11">
                 <textarea class="form-control" rows="5" id="desc"></textarea>
             </div>
         </div>
 
-        <button class="btn btn-default col-sm-offset-1 col-1" type="submit">Submit</button>
+        <button class="btn btn-default col-sm-offset-1 col-1" onclick="return validate();" type="submit">Submit</button>
     </form>
     <div>
         <table class="table table-striped">
