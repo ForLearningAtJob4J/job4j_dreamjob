@@ -23,6 +23,20 @@
             alert(err.toString());
         });
     }
+
+    function sendGreetingJSON() {
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:8080/job4j_dreamjob/greet',
+            data: JSON.stringify({text: $('#exampleInput').val()}),
+            dataType: 'json'
+        }).done(function (data) {
+            $('#exampleInput').before('<p>data.text=' + data.text + '</p>');
+        }).fail(function (err) {
+            alert(err.toString());
+        });
+    }
+
 </script>
 
 <div class="container">
@@ -32,7 +46,16 @@
             <input aria-describedby="emailHelp" class="form-control" id="exampleInputEmail1" placeholder="Enter email"
                    type="email">
         </div>
-        <button class="btn btn-primary" onclick="sendGreeting()" type="button">Submit</button>
+        <button class="btn btn-primary" onclick="sendGreeting()" type="button">JQuery AJAX GET</button>
+    </form>
+</div>
+<div class="container">
+    <form>
+        <div class="form-group">
+            <label for="exampleInput">Email address</label>
+            <input class="form-control" id="exampleInput" placeholder="Enter something" type="text">
+        </div>
+        <button class="btn btn-primary" onclick="sendGreetingJSON()" type="button">JQuery AJAX POST</button>
     </form>
 </div>
 </body>
