@@ -36,8 +36,9 @@
                 <table class="table align-content-center">
                     <thead>
                     <tr>
-                        <th scope="col">Названия</th>
+                        <th scope="col">Имя</th>
                         <th scope="col">Фото</th>
+                        <th scope="col">Город</th>
                         <th scope="col"></th>
                     </tr>
                     </thead>
@@ -55,6 +56,9 @@
                                 </div>
                                 <a href="<c:url value='/photo?op=load&id=${candidate.id}'/>"><i class="fa fa-folder-open-o"></i></a>
                                 <a href="<c:url value='/photo?op=del&id=${candidate.id}'/>"><i class="fa fa-remove"></i></a>
+                            </td>
+                            <td>
+                                <c:out value="${candidate.city.name}"/>
                             </td>
                             <td>
                                 <a href="<c:url value='/candidate.do?op=del&id=${candidate.id}'/>"><i

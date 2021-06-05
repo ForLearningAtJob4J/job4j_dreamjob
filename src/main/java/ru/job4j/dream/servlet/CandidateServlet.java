@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import ru.job4j.dream.file.Filer;
 import ru.job4j.dream.model.Candidate;
+import ru.job4j.dream.model.City;
 import ru.job4j.dream.store.PsqlStore;
 
 import java.io.IOException;
@@ -51,7 +52,8 @@ public class CandidateServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         switch (req.getParameter("op")) {
             case "edit":
-                PsqlStore.instOf().save(new Candidate(Integer.parseInt(req.getParameter("id")), req.getParameter("name")));
+                PsqlStore.instOf().save(new Candidate(Integer.parseInt(req.getParameter("id")), req.getParameter("name"),
+                        new City(Integer.parseInt(req.getParameter("city")), "")));
                 break;
             case "del":
                 PsqlStore.instOf().delete(new Candidate(Integer.parseInt(req.getParameter("id")), ""));

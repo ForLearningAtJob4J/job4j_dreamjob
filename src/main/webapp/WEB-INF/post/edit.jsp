@@ -16,7 +16,25 @@
             integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script>
+        function validate() {
+            let message = '';
+            if ($('#name').val() === '') {
+                message += 'Имя\n';
+            }
+            if ($('#desc').val() === '') {
+                message += 'Адрес электронной почты\n';
+            }
 
+            if (message === '') {
+                return true;
+            }
+            message = "Заполните следующие поля:\n\n" + message;
+            alert(message);
+
+            return false;
+        }
+    </script>
     <title>Работа мечты</title>
 </head>
 <body>
@@ -30,12 +48,12 @@
                 <div class="card-body">
                     <form action="<%=request.getContextPath()%>/post.do?op=edit&id=${post.id}" method="post">
                         <div class="form-group">
-                            <label>Название</label>
-                            <input type="text" class="form-control" name="name" value="${post.name}">
-                            <label>Описание</label>
-                            <input type="text" class="form-control" name="description" value="${post.description}">
+                            <label for="name">Название</label>
+                            <input id="name" type="text" class="form-control" name="name" value="${post.name}">
+                            <label for="desc">Описание</label>
+                            <input id="desc" type="text" class="form-control" name="description" value="${post.description}">
                         </div>
-                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                        <button onclick="return validate();" type="submit" class="btn btn-primary">Сохранить</button>
                     </form>
                 </div>
             </div>
