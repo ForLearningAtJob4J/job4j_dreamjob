@@ -13,11 +13,8 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
@@ -37,12 +34,8 @@ public class PostServletTest {
         when(req.getParameter("name")).thenReturn("CEO");
         when(req.getParameter("description")).thenReturn("some description");
         new PostServlet().doPost(req, resp);
-        var it = memStore.findAllPosts().stream().iterator();
-        assertThat(it.next().getName(), is("Junior Java Job"));
-        assertThat(it.next().getName(), is("Middle Java Job"));
-        assertThat(it.next().getName(), is("Senior Java Job"));
-        assertThat(it.next().getName(), is("CEO"));
-        assertFalse(it.hasNext());
+        var posts = memStore.findAllPosts();
+        assertTrue(posts.stream().anyMatch(el -> el.getName().equals("CEO")));
     }
 
     @Test
